@@ -17,7 +17,7 @@ include_directories(src/include)
 
 #set(EXTENSION_SOURCES src/quack_extension.cpp)
 set(EXTENSION_SOURCES 
-  src/kdb_extension.cpp
+  src/quack_extension.cpp
   src/kdb_reader/kdbreader.cpp
   src/kdb_reader/inputstream.cpp
   src/kdb_reader/qfile.cpp
