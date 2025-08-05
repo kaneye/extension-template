@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 
 # Set extension name here
-#set(TARGET_NAME quack)
-set(TARGET_NAME kdb)
+set(TARGET_NAME quack)
+#set(TARGET_NAME kdb)
 
 # DuckDB's extension distribution supports vcpkg. As such, dependencies can be added in ./vcpkg.json and then
 # used in cmake with find_package. Feel free to remove or replace with other dependencies.
