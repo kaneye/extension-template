@@ -602,15 +602,15 @@ static void LoadInternal(DatabaseInstance &instance) {
 
 }
 
-void KdbExtension::Load(DuckDB &db) {
+void QuackExtension::Load(DuckDB &db) {
 	LoadInternal(*db.instance);
 }
-std::string KdbExtension::Name() {
+std::string QuackExtension::Name() {
     return "quack";
     //return "kdb";
 }
 
-std::string KdbExtension::Version() const {
+std::string QuackExtension::Version() const {
 #ifdef EXT_VERSION_QUACK
 	return EXT_VERSION_QUACK;
 #else
@@ -622,12 +622,12 @@ std::string KdbExtension::Version() const {
 
 extern "C" {
 
-DUCKDB_EXTENSION_API void kdb_init(duckdb::DatabaseInstance &db) {
+DUCKDB_EXTENSION_API void quack_init(duckdb::DatabaseInstance &db) {
 	duckdb::DuckDB db_wrapper(db);
-	db_wrapper.LoadExtension<duckdb::KdbExtension>();
+	db_wrapper.LoadExtension<duckdb::QuackExtension>();
 }
 
-DUCKDB_EXTENSION_API const char *kdb_version() {
+DUCKDB_EXTENSION_API const char *quack_version() {
 	return duckdb::DuckDB::LibraryVersion();
 }
 }
