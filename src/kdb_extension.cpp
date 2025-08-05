@@ -606,8 +606,8 @@ void KdbExtension::Load(DuckDB &db) {
 	LoadInternal(*db.instance);
 }
 std::string KdbExtension::Name() {
-	//return "quack";
-    return "kdb";
+    return "quack";
+    //return "kdb";
 }
 
 std::string KdbExtension::Version() const {
