@@ -24,6 +24,8 @@
 #define EPOCH 10957  //1970.01.01~2000.01.01 days
 #define EPOCH_MICRO 10957*24*60*60*1e6
 
+#define DEBUG_MODE 1
+
 namespace duckdb {
 
 inline void QuackScalarFun(DataChunk &args, ExpressionState &state, Vector &result) {
@@ -284,7 +286,9 @@ size_t fill_data(DataChunk& db_chunk, size_t col_idx, std::shared_ptr<KDBFileRea
     }
 
     if((dtype>=20)&&(dtype<=77)) {   //enum type
-        //std::cout<<"info,fill_data enum"<<std::endl;
+#if DEBUG_MODE 	    
+        std::cout<<"info,fill_data enum"<<std::endl;
+#endif	    
         std::vector<std::string> r_vec;
         size_t already_filled = reader->get_readed_size();
         read_rows = reader->read(already_filled,STANDARD_VECTOR_SIZE,r_vec); 
