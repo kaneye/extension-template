@@ -6,7 +6,7 @@
 
 bool filestream::init() {
     if(this->path=="") {
-        std::cout<<"error,file path is empty:"<<this->path<<std::endl;
+        std::cout<<"error,file path is empty:"<<this->path_<<std::endl;
         return false;
     }        
 
