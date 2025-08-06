@@ -5,19 +5,29 @@
 
 
 bool filestream::init() {
+    if(this->path=="") {
+        std::cout<<"error,file path is empty:"<<this->path<<std::endl;
+        return false;
+    }        
+
     this->fp_ = fopen(this->path_.c_str(), "rb");
+    if (this->fp_==NULL)
+        return false;
+
     return true;
 }
 size_t filestream::fread1(void *ptr, size_t size, size_t count) {
     if(fp_==nullptr)
         this->init();
 
+    assert(fp_);
     return fread(ptr, size, count, this->fp_);
 }
 int filestream::fseek1(long offset, int fromwhere) {
     if(fp_==nullptr)
         this->init();
 
+    assert(fp_);
     return fseek(this->fp_, offset, fromwhere);
 }
 size_t filestream::get_length() {
