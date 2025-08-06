@@ -539,6 +539,9 @@ static void ReadKDBFunction(ClientContext &context, TableFunctionInput &data, Da
 // template<typename T>
 // void ReadKDBFunction_impl(ClientContext &context, TableFunctionInput &data, DataChunk &output) {    
 //    auto &bind_data = data.bind_data->CastNoConst<T>();
+#if DEBUG_MODE
+    std::cout<<"debug,ReadKDBFunction"<<std::endl;
+#endif	
     auto &bind_data = data.bind_data->CastNoConst<ReadKDBBindData>();
     //auto &fs = FileSystem::GetFileSystem(context);
 	//std::cout<<"info,output.ColumnCount():"<<output.ColumnCount()<<std::endl;
