@@ -192,8 +192,7 @@ int KDBFileReader::read_meta(size_t base_offset) {
 #endif        
         // ExtListHeader(16)
         // char enum_name[4096 - (16 + 16)];  //就是一个字符串"sym"
-        this->read_meta(0x1000-16);
-        return 0;
+        return this->read_meta(0x1000-16);
     }
         
 }
