@@ -29,7 +29,7 @@ void KDBFileReader::set_istream(std::shared_ptr<inputstream> istream)
 
 int KDBFileReader::read_meta(size_t base_offset) {
 #if DEBUG_MODE 
-    std::cout<<"info,read_meta:"<<base_offset<<std::endl;
+    std::cout<<"info,read_meta:"<<this->path_<<",base_offset:"<<base_offset<<std::endl;
 #endif    
     // this->fp_ = fopen(this->path_.c_str(), "rb");
     // this->file_len_ = get_file_length(this->fp_);
