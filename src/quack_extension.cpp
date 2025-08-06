@@ -417,7 +417,7 @@ duckdb::LogicalType mapping_kdbdtype(int dtype)
 std::shared_ptr<KDBFileReader>
  build_reader(const std::string& dir, const std::string& file_name, const std::string& sym_file_path, vector<LogicalType> &return_types, vector<string> &names)
 {
-    std::cout<<"info,reading file,dir:"<<dir<<",file:"<<file_name<<std::endl;
+    std::cout<<"info,build_reader(),reading file,dir:"<<dir<<",file:"<<file_name<<std::endl;
     std::string col_file = dir+"/"+file_name;
     if(!file_exist(col_file.c_str())) {
         std::cout<<"error,col file not exist:"<<col_file<<std::endl;
