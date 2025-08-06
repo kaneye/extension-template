@@ -50,7 +50,7 @@ int KDBFileReader::read_meta(size_t base_offset) {
     //std::cout<<"info,datatype:"<<(int)datatype<<std::endl;   //7
     this->dtype_ = (int)datatype;
 
-    std::cout << "debug,position1:"<<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[0])) << " " <<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[1]));
+    std::cout << "debug,position1:"<<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[0])) << " " <<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[1]))<<std::endl;
     if(strncmp(header,"kx",HEADER_BYTES)==0) {  //.data()
         //std::cout<<"error,unsupported kx"<<std::endl;  
         size_t MAGIC_BYTES = 8;
@@ -84,7 +84,7 @@ int KDBFileReader::read_meta(size_t base_offset) {
         }
     }
     if((int)datatype<20) {
-        std::cout << "debug,position2:"<<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[0])) << " " <<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[1]));
+        std::cout << "debug,position2:"<<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[0])) << " " <<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[1]))<<std::endl;
         if(strncmp(header,"\xfe\x20",HEADER_BYTES)==0) {   //list
 #if DEBUG_MODE         
             std::cout<<"info,header:FE20,dtype:"<<(int)datatype<<std::endl;
@@ -104,7 +104,7 @@ int KDBFileReader::read_meta(size_t base_offset) {
             return 0;
         }
     }
-    std::cout << "debug,position3:"<<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[0])) << " " <<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[1]));
+    std::cout << "debug,position3:"<<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[0])) << " " <<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[1]))<<std::endl;
     if((strncmp(header,"\xFD\00",HEADER_BYTES)==0)&&((int)datatype==4)) {
 #if DEBUG_MODE     
         std::cout<<"info,header:FD00,dtype:"<<(int)datatype<<std::endl;
@@ -114,7 +114,7 @@ int KDBFileReader::read_meta(size_t base_offset) {
         return 0;
 
     }
-    std::cout << "debug,position4:"<<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[0])) << " " <<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[1]));
+    std::cout << "debug,position4:"<<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[0])) << " " <<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[1]))<<std::endl;
     if((strncmp(header,"\xFD\00",HEADER_BYTES)==0)&&((int)datatype>=20)&&((int)datatype<=76)) {   //enum
 #if DEBUG_MODE     
         std::cout<<"info,header:FD00,dtype:"<<(int)datatype<<",";
@@ -140,7 +140,7 @@ int KDBFileReader::read_meta(size_t base_offset) {
         }
 
     }
-    std::cout << "debug,position5:"<<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[0])) << " " <<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[1]));
+    std::cout << "debug,position5:"<<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[0])) << " " <<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[1]))<<std::endl;
     if((strncmp(header,"\xFD\01",HEADER_BYTES)==0)&&((int)datatype==77)) {   //anymap
 #if DEBUG_MODE  
         std::cout<<"info,header:FD01,dtype:"<<(int)datatype<<",basestrfile:anymap"<<std::endl;
