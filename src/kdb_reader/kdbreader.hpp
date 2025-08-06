@@ -11,7 +11,7 @@
 #include "utils.hpp"
 #include "inputstream.hpp"
 
-#define DEBUG_MODE  0
+#define DEBUG_MODE  1
 
 #define HEADER_BYTES 2
 #define DTYPE_BYTES 1
