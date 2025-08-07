@@ -134,7 +134,7 @@ int KDBFileReader::read_meta(size_t base_offset) {
             sym_reader.read_meta();
             sym_reader.read<std::string>(0, 10000000, this->sym_vec_);   //read all,std::numeric_limits<size_t>::max()
 #if DEBUG_MODE             
-            std::cout<<"info,read sym file completed:"<<<std::dec<<this->sym_vec_.size()<<" ------------------------"<<std::endl; 
+            std::cout<<"info,read sym file completed:"<<std::dec<<this->sym_vec_.size()<<" ------------------------"<<std::endl; 
 #endif            
             assert(this->sym_vec_.size()>0);
         }
