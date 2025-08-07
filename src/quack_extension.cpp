@@ -24,7 +24,7 @@
 #define EPOCH 10957  //1970.01.01~2000.01.01 days
 #define EPOCH_MICRO 10957*24*60*60*1e6
 
-#define DEBUG_MODE 1
+#define DEBUG_MODE 0
 
 namespace duckdb {
 
