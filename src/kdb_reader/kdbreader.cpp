@@ -119,6 +119,23 @@ int KDBFileReader::read_meta(size_t base_offset) {
 #endif        
         this->offset_ = base_offset+16;
         this->file_byte_size_ = this->file_len_ - this->offset_;
+
+        ///comments:read item_cnt from header
+        std::vector<uint8_t> as_item_cnt;
+        readlist<uint8_t>(this->istream_, base_offset+8, 8, as_item_cnt);
+        long item_cnt = 0;
+        for (int i=7; i>=0; i--) {
+            item_cnt = (item_cnt << 8) | as_item_cnt[i];
+        }
+
+        if(this->file_byte_size_ != sizeof(long)*item_cnt) {
+#if DEBUG_MODE             
+            std::cout<<"info,file_size not match:item_cnt:"<<std::dec<<item_cnt<<",file_byte:"<<this->file_byte_size_<<std::endl;
+#endif
+            if(item_cnt>0)
+                this->file_byte_size_ = sizeof(long)*item_cnt; 
+        }  
+        
         //std::vector<long> idx; 
         //readlist1<long>(fp_, base_offset+16, file_len-(base_offset+16), item_start, item_read, idx);
         //std::cout<<"info,enum idx:"<<idx.size()<<","<<idx[0]<<","<<idx[10]<<std::endl;
