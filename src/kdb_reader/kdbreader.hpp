@@ -12,6 +12,7 @@
 #include "inputstream.hpp"
 
 #define DEBUG_MODE  1
+#define DEBUG_ENUM 0
 
 #define HEADER_BYTES 2
 #define DTYPE_BYTES 1
@@ -123,10 +124,19 @@ inline size_t KDBFileReader::read(size_t item_start, size_t item_read, std::vect
         }
     }
     else if((strncmp(header,"\xFD\00",HEADER_BYTES)==0)&&(this->dtype_>=20)&&(this->dtype_<=77)) {   //enum  
-        //std::cout<<"debug,read enum"<<std::endl;
+#if DEBUG_ENUM  
+        std::cout<<"debug,read enum:"<<this->sym_vec_.size()<<std::endl;	  
+#endif
         std::vector<long> idx;         
         readlist1<long>(this->istream_, this->offset_, this->file_byte_size_, item_start, item_read, idx);
+        
+#if DEBUG_ENUM 
+	  auto max_it = std::max_element(idx.begin(), idx.end()); 
+	  std::cout<<"info,enum idx:"<<idx.size()<<",offset:"<<offset_<<",file_byte:"<<this->file_byte_size_<<",item_start:"<<item_start<<",idx max:"<< *max_it<<",max_it:"<<max_it-idx.begin()<<std::endl;
+        //std::cout<<"info,enum info:"<<sizeof(long)<<std::endl;
         //std::cout<<"info,enum idx:"<<idx.size()<<","<<idx[0]<<","<<idx[10]<<std::endl;
+#endif
+        
         for(long i=0;i<idx.size();i++)
             out.push_back(this->sym_vec_[idx[i]]);
     }
