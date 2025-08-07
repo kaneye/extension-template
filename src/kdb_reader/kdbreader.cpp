@@ -134,11 +134,11 @@ int KDBFileReader::read_meta(size_t base_offset) {
             sym_reader.read_meta();
             sym_reader.read<std::string>(0, 10000000, this->sym_vec_);   //read all,std::numeric_limits<size_t>::max()
 #if DEBUG_MODE             
-            std::cout<<"info,read sym file completed:"<<this->sym_vec_.size()<<" ------------------------"<<std::endl; 
+            std::cout<<"info,read sym file completed:"<<<std::dec<<this->sym_vec_.size()<<" ------------------------"<<std::endl; 
 #endif            
             assert(this->sym_vec_.size()>0);
         }
-
+        return 0;
     }
     std::cout << "debug,position5:"<<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[0])) << " " <<std::hex << std::setw(2) << std::setfill('0') << static_cast<int>(static_cast<unsigned char>(header[1]))<<std::endl;
     if((strncmp(header,"\xFD\01",HEADER_BYTES)==0)&&((int)datatype==77)) {   //anymap
@@ -182,7 +182,7 @@ int KDBFileReader::read_meta(size_t base_offset) {
         } else {
             printf("Failed to read string array. Please ensure the files exist and are correctly formatted.\n");
         }
-
+        return 0;
     }    
     if(((int)datatype>77)&&((int)datatype<97)) {
         std::cout<<"error,not implemented"<<std::endl;
