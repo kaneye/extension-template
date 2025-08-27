@@ -70,9 +70,14 @@ int KDBFileReader::read_meta(size_t base_offset) {
 
             //std::vector<byte> buffer;             
             std::shared_ptr<bufferstream> buffer_stream = std::make_shared<bufferstream>();
-            binfile.inflateBody(buffer_stream->buffer_);
+#if DEBUG_MODE
+            std::cout<<"debug,before inflateBody"<<std::endl;
+#endif            
+            binfile.inflateBody(buffer_stream->buffer_);       
             //std::cout<<"info,inflateBody:"<<buffer_stream->buffer_.size()<<std::endl;
-
+#if DEBUG_MODE     
+            std::cout<<"debug,inflateBody completed"<<std::endl;
+#endif        
             //std::string tmp_file("/home/yky/duckdb_dev/testdata/bp10_1");
             //std::ofstream outfile(tmp_file, std::ios::binary);
             //outfile.write(reinterpret_cast<const char*>(buffer.data()), buffer.size());
