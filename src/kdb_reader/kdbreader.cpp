@@ -4,7 +4,7 @@
 #include <fstream>
 #include "readstring.hpp"
 
-#define DEBUG_MODE 0
+#define DEBUG_MODE 1
 
 
 // KDBFileReader::KDBFileReader(const std::string &path, const std::string& sympath)
