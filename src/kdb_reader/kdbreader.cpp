@@ -54,12 +54,12 @@ int KDBFileReader::read_meta(size_t base_offset) {
     if(strncmp(header,"kx",HEADER_BYTES)==0) {  //.data()
         //std::cout<<"error,unsupported kx"<<std::endl;  
         size_t MAGIC_BYTES = 8;
-        std::vector<char> header(MAGIC_BYTES, '\0');
+        std::vector<char> header_kx(MAGIC_BYTES, '\0');
         //fseek(fp_, 0, SEEK_SET);
-        //const auto read = fread(header.data(), 1, header.size(), fp_);
+        //const auto read = fread(header_kx.data(), 1, header_kx.size(), fp_);
         this->istream_->fseek1(0, SEEK_SET);
-        const auto read = this->istream_->fread1(header.data(), 1, header.size());
-        const std::string magic{header.cbegin(), header.cend()};
+        const auto read = this->istream_->fread1(header_kx.data(), 1, header_kx.size());
+        const std::string magic(header_kx.cbegin(), header_kx.cend());
         if(magic == "kxzipped") {
 #if DEBUG_MODE 
             std::cout<<"debug,kxzipped"<<std::endl;
