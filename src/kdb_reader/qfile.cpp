@@ -30,6 +30,7 @@ kdb::BinFile::BinFile(FILE *fp)
   :filename_(""), fp_(fp) {}
 
 kdb::BinFile::~BinFile() {
+  fp_ = nullptr;
   std::cout<<"debug,~BinFile()"<<std::endl;
     // if(fp_) {
     //     fclose(fp_);
