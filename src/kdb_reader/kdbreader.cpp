@@ -69,10 +69,7 @@ int KDBFileReader::read_meta(size_t base_offset) {
             kdb::BinFile binfile = kdb::BinFile(fstrem->fp_);
 
             //std::vector<byte> buffer;             
-            std::shared_ptr<bufferstream> buffer_stream = std::make_shared<bufferstream>();
-#if DEBUG_MODE
-            std::cout<<"debug,before inflateBody"<<std::endl;
-#endif            
+            std::shared_ptr<bufferstream> buffer_stream = std::make_shared<bufferstream>();         
             binfile.inflateBody(buffer_stream->buffer_);       
             //std::cout<<"info,inflateBody:"<<buffer_stream->buffer_.size()<<std::endl;
 #if DEBUG_MODE     
@@ -82,6 +79,9 @@ int KDBFileReader::read_meta(size_t base_offset) {
             //std::ofstream outfile(tmp_file, std::ios::binary);
             //outfile.write(reinterpret_cast<const char*>(buffer.data()), buffer.size());
             this->set_istream(buffer_stream);
+#if DEBUG_MODE                 
+            std::cout<<"debug,after set_istream"<<std::endl;
+#endif
             return this->read_meta(0);
         }
         else {
