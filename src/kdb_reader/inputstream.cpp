@@ -56,7 +56,9 @@ size_t bufferstream::fread1(void *ptr, size_t size, size_t count) {
     assert(this->get_length()>0);
     assert(this->get_length()>=this->pos_);
     size_t bytes_read = std::min(size*count, get_length()-this->pos_);
+    std::cout<<"mem_debug,bufferstream::fread1,before memcpy:"<<pos_<<","<<ptr<<","<<bytes_read;
     memcpy(ptr,this->buffer_.data()+this->pos_, bytes_read);
+    std::cout<<"mem_debug,bufferstream::fread1,after memcpy";
     this->pos_ += bytes_read;
     return bytes_read;
 }
