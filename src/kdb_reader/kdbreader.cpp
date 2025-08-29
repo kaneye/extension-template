@@ -86,7 +86,14 @@ int KDBFileReader::read_meta(size_t base_offset) {
 #if DEBUG_MODE                 
             std::cout<<"mem_debug,after set_istream"<<std::endl;
 #endif
-            return this->read_meta(0);
+            //return this->read_meta(0);
+            if(true) {
+                this->file_len_ = this->istream_->get_length();          
+                this->istream_->fseek1(0, SEEK_SET);
+                this->istream_->fread1(this->header,1, HEADER_BYTES);            
+                size_t read = this->istream_->fread1(&datatype, DTYPE_BYTES, 1);
+                this->dtype_ = (int)datatype;
+            }
         }
         else {
             std::cout<<"error,unsupported kx"<<std::endl;
