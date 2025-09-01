@@ -24,7 +24,7 @@
 #define EPOCH 10957  //1970.01.01~2000.01.01 days
 #define EPOCH_MICRO 10957*24*60*60*1e6
 
-#define DEBUG_MODE 0
+#define DEBUG_MODE 1
 
 namespace duckdb {
 
@@ -545,7 +545,12 @@ static void ReadKDBFunction(ClientContext &context, TableFunctionInput &data, Da
     auto &bind_data = data.bind_data->CastNoConst<ReadKDBBindData>();
     //auto &fs = FileSystem::GetFileSystem(context);
 	//std::cout<<"info,output.ColumnCount():"<<output.ColumnCount()<<std::endl;
-    
+
+#if DEBUG_MODE
+    output.SetCardinality(0);
+    return;
+#endif		
+	
     // If already finished, signal end of data
     if (bind_data.finished) {
         output.SetCardinality(0);
