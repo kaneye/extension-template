@@ -55,9 +55,10 @@ int KDBFileReader::read_meta(size_t base_offset) {
             if(true) {
                 std::cout<<"mem_debug,read header,dtype from new stream"<<std::endl;
                 this->file_len_ = this->istream_->get_length(); 
+                std::cout<<"mem_debug,file_len_:"<<this->file_len_<<std::endl;
                 this->istream_->fseek1(0, SEEK_SET);
                 this->istream_->fread1(this->header,1, HEADER_BYTES);            
-                size_t read = this->istream_->fread1(&datatype, DTYPE_BYTES, 1);
+                this->istream_->fread1(&datatype, DTYPE_BYTES, 1);
                 this->dtype_ = (int)datatype;
                 std::cout<<"mem_debug,read header,dtype from new stream completed."<<std::endl;
             }
