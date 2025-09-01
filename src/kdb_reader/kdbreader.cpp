@@ -67,18 +67,23 @@ int KDBFileReader::read_meta(size_t base_offset) {
 #if DEBUG_MODE 
             std::cout<<"debug,kxzipped"<<std::endl;
 #endif
+            std::shared_ptr<bufferstream> buffer_stream = std::make_shared<bufferstream>(); 
+            if(true) {
+                
             std::shared_ptr<filestream> fstrem = std::dynamic_pointer_cast<filestream>(this->istream_);
             assert(fstrem);
             kdb::BinFile binfile = kdb::BinFile(fstrem->fp_);
 
             //std::vector<byte> buffer;             
-            std::shared_ptr<bufferstream> buffer_stream = std::make_shared<bufferstream>();         
+            //std::shared_ptr<bufferstream> buffer_stream = std::make_shared<bufferstream>();   //move to out of if(true) block        
             binfile.inflateBody(buffer_stream->buffer_);  
             fstrem = nullptr;
             //std::cout<<"info,inflateBody:"<<buffer_stream->buffer_.size()<<std::endl;
 #if DEBUG_MODE     
             std::cout<<"mem_debug,inflateBody completed"<<std::endl;
 #endif        
+            }
+            
             //std::string tmp_file("/home/yky/duckdb_dev/testdata/bp10_1");
             //std::ofstream outfile(tmp_file, std::ios::binary);
             //outfile.write(reinterpret_cast<const char*>(buffer.data()), buffer.size());
@@ -88,11 +93,13 @@ int KDBFileReader::read_meta(size_t base_offset) {
 #endif
             //return this->read_meta(0);
             if(true) {
+                std::cout<<"mem_debug,read header,dtype from new stream"<<std::endl;
                 this->file_len_ = this->istream_->get_length();          
                 this->istream_->fseek1(0, SEEK_SET);
                 this->istream_->fread1(this->header,1, HEADER_BYTES);            
                 size_t read = this->istream_->fread1(&datatype, DTYPE_BYTES, 1);
                 this->dtype_ = (int)datatype;
+                std::cout<<"mem_debug,read header,dtype from new stream completed."<<std::endl;
             }
         }
         else {
