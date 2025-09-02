@@ -73,7 +73,7 @@ int KDBFileReader::read_meta(size_t base_offset) {
             fstrem = nullptr;
             //std::cout<<"info,inflateBody:"<<buffer_stream->buffer_.size()<<std::endl;
 #if DEBUG_MODE     
-            std::cout<<"mem_debug,inflateBody completed"<<std::endl;
+            std::cout<<"debug,inflateBody completed:"<<buffer_stream->get_length()<<std::endl;
 #endif        
             
             //std::string tmp_file("/home/yky/duckdb_dev/testdata/bp10_1");
