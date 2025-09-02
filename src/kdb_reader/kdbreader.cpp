@@ -34,13 +34,11 @@ int KDBFileReader::read_meta(size_t base_offset) {
     // this->fp_ = fopen(this->path_.c_str(), "rb");
     // this->file_len_ = get_file_length(this->fp_);
     this->file_len_ = this->istream_->get_length();
-    std::cout<<"mem_debug,get_length:"<<file_len_<<std::endl;
 
     // fseek(fp_, base_offset, SEEK_SET);    
     this->istream_->fseek1(base_offset, SEEK_SET);
     // fread(this->header, 1, HEADER_BYTES, fp_);
     this->istream_->fread1(this->header,1, HEADER_BYTES);
-    std::cout<<"mem_debug,fread1:"<<std::endl;
     //readlist<char>(fp_, 0, HEADER_BYTES, header);
     //std::cout<<"info,header:"<<strncmp(header,"\xfe\x20")<<","<<strncmp(header,"\xff\01")<<","<<strncmp(header,"\xFD\00")<<std::endl;   //7       
     //std::cout<<"info,header:"<<(std::string(header.data(),2)==std::string("\xfe\x20",2))<<","<<(std::string(header.data(),2)==std::string("\xff\01",2))<<std::endl;   //7   
@@ -48,7 +46,6 @@ int KDBFileReader::read_meta(size_t base_offset) {
     char datatype;        
     //size_t read = fread(&datatype, DTYPE_BYTES, 1, fp_);
     size_t read = this->istream_->fread1(&datatype, DTYPE_BYTES, 1);
-    std::cout<<"mem_debug,fread1:DTYPE_BYTES"<<std::endl;
     //char datatype = readatom<char>(fp_, HEADER_BYTES, DTYPE_BYTES);
     //std::cout<<"info,datatype:"<<(int)datatype<<std::endl;   //7
     this->dtype_ = (int)datatype;
@@ -61,46 +58,30 @@ int KDBFileReader::read_meta(size_t base_offset) {
         //fseek(fp_, 0, SEEK_SET);
         //const auto read = fread(header_kx.data(), 1, header_kx.size(), fp_);
         this->istream_->fseek1(0, SEEK_SET);
-        const auto read = this->istream_->fread1(header_kx.data(), 1, header_kx.size());
+        this->istream_->fread1(header_kx.data(), 1, header_kx.size());
         const std::string magic(header_kx.cbegin(), header_kx.cend());
         if(magic == "kxzipped") {
 #if DEBUG_MODE 
             std::cout<<"debug,kxzipped"<<std::endl;
-#endif
-            std::shared_ptr<bufferstream> buffer_stream = std::make_shared<bufferstream>(); 
-            if(true) {
-                
+#endif               
             std::shared_ptr<filestream> fstrem = std::dynamic_pointer_cast<filestream>(this->istream_);
             assert(fstrem);
             kdb::BinFile binfile = kdb::BinFile(fstrem->fp_);
-
-            //std::vector<byte> buffer;             
-            //std::shared_ptr<bufferstream> buffer_stream = std::make_shared<bufferstream>();   //move to out of if(true) block        
+        
+            std::shared_ptr<bufferstream> buffer_stream = std::make_shared<bufferstream>();   //move to out of if(true) block        
             binfile.inflateBody(buffer_stream->buffer_);  
             fstrem = nullptr;
             //std::cout<<"info,inflateBody:"<<buffer_stream->buffer_.size()<<std::endl;
 #if DEBUG_MODE     
             std::cout<<"mem_debug,inflateBody completed"<<std::endl;
 #endif        
-            }
             
             //std::string tmp_file("/home/yky/duckdb_dev/testdata/bp10_1");
             //std::ofstream outfile(tmp_file, std::ios::binary);
             //outfile.write(reinterpret_cast<const char*>(buffer.data()), buffer.size());
             this->set_istream(buffer_stream);
-#if DEBUG_MODE                 
-            std::cout<<"mem_debug,after set_istream"<<std::endl;
-#endif
-            //return this->read_meta(0);
-            if(true) {
-                std::cout<<"mem_debug,read header,dtype from new stream"<<std::endl;
-                this->file_len_ = this->istream_->get_length();          
-                this->istream_->fseek1(0, SEEK_SET);
-                this->istream_->fread1(this->header,1, HEADER_BYTES);            
-                size_t read = this->istream_->fread1(&datatype, DTYPE_BYTES, 1);
-                this->dtype_ = (int)datatype;
-                std::cout<<"mem_debug,read header,dtype from new stream completed."<<std::endl;
-            }
+            
+            return this->read_meta(0);
         }
         else {
             std::cout<<"error,unsupported kx"<<std::endl;
