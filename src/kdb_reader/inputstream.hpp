@@ -7,7 +7,7 @@
 class inputstream {
 public:
     virtual size_t fread1(void *ptr, size_t size, size_t count) = 0;
-    virtual int fseek1(long offset, int fromwhere) = 0;
+    virtual int fseek1(size_t offset, int fromwhere) = 0;
     virtual size_t get_length() = 0;
 };
 
@@ -15,7 +15,7 @@ public:
 class filestream:public inputstream {
 public:
     size_t fread1(void *ptr, size_t size, size_t count);
-    int fseek1(long offset, int fromwhere);   
+    int fseek1(size_t offset, int fromwhere);   
     size_t get_length(); 
     //filestream(FILE* fp);
     filestream(const std::string &path);
@@ -36,7 +36,7 @@ public:
 class bufferstream:public inputstream {
 public:
     size_t fread1(void *ptr, size_t size, size_t count);
-    int fseek1(long offset, int fromwhere);   
+    int fseek1(size_t offset, int fromwhere);   
     size_t get_length(); 
     //bufferstream(char* buffer);
 
