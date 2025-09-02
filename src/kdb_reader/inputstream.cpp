@@ -71,6 +71,8 @@ int bufferstream::fseek1(size_t offset, int fromwhere) {
     else {
         std::cout<<"error,feek1"<<std::endl;
         assert(0);
+        return -1;
     }
+    return 0;
 }
 //bufferstream::bufferstream(char* buffer): buffer_(buffer) { pos_ = 0;}
