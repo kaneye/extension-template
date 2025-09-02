@@ -23,7 +23,7 @@ size_t filestream::fread1(void *ptr, size_t size, size_t count) {
     assert(fp_);
     return fread(ptr, size, count, this->fp_);
 }
-int filestream::fseek1(long offset, int fromwhere) {
+int filestream::fseek1(size_t offset, int fromwhere) {
     if(fp_==nullptr)
         this->init();
 
@@ -65,7 +65,7 @@ size_t bufferstream::fread1(void *ptr, size_t size, size_t count) {
 size_t bufferstream::get_length() {
     return buffer_.size();
 }
-int bufferstream::fseek1(long offset, int fromwhere) {
+int bufferstream::fseek1(size_t offset, int fromwhere) {
     if(SEEK_SET==fromwhere)
         this->pos_ = 0+offset;
     else {
