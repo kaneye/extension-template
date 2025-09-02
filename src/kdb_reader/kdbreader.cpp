@@ -60,7 +60,7 @@ int KDBFileReader::read_meta(size_t base_offset) {
                 std::cout<<"mem_debug,fseek1:"<<std::endl;
                 size_t read_byte = this->istream_->fread1(this->header,1, HEADER_BYTES);            
                 std::cout<<"mem_debug,fread header:"<<read_byte<<std::endl;
-                size_t read_byte = this->istream_->fread1(&datatype, DTYPE_BYTES, 1);
+                read_byte = this->istream_->fread1(&datatype, DTYPE_BYTES, 1);
                 std::cout<<"mem_debug,fread datatype:"<<read_byte<<std::endl;
                 this->dtype_ = (int)datatype;
                 std::cout<<"mem_debug,read header,dtype from new stream completed."<<std::endl;
