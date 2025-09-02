@@ -47,7 +47,7 @@ size_t filestream::get_length() {
 filestream::filestream(const std::string &path): path_(path),fp_(nullptr) {}
 filestream::~filestream() {
     fclose(this->fp_);
-    std::cout<<"debug,~filestream()"<<std::endl;
+    //std::cout<<"mem_debug,~filestream()"<<std::endl;
 }
 
 
