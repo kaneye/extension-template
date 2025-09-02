@@ -31,7 +31,7 @@ kdb::BinFile::BinFile(FILE *fp)
 
 kdb::BinFile::~BinFile() {
   fp_ = nullptr;
-  std::cout<<"mem_debug,~BinFile()"<<std::endl;
+  //std::cout<<"mem_debug,~BinFile()"<<std::endl;
     // if(fp_) {
     //     fclose(fp_);
     // }
